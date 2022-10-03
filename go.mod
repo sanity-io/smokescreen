@@ -1,4 +1,4 @@
-module github.com/stripe/smokescreen
+module github.com/sanity-io/smokescreen
 
 go 1.18
 
