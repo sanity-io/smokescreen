@@ -16,13 +16,13 @@ import (
 
 	proxyproto "github.com/armon/go-proxyproto"
 	"github.com/rs/xid"
+	"github.com/sanity-io/smokescreen/internal/einhorn"
+	acl "github.com/sanity-io/smokescreen/pkg/smokescreen/acl/v1"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/conntrack"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/hostport"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 	"github.com/sirupsen/logrus"
 	"github.com/stripe/goproxy"
-	"github.com/stripe/smokescreen/internal/einhorn"
-	acl "github.com/stripe/smokescreen/pkg/smokescreen/acl/v1"
-	"github.com/stripe/smokescreen/pkg/smokescreen/conntrack"
-	"github.com/stripe/smokescreen/pkg/smokescreen/hostport"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
 )
 
 const (

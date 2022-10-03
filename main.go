@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/sanity-io/smokescreen/cmd"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen"
 	"github.com/sirupsen/logrus"
-	"github.com/stripe/smokescreen/cmd"
-	"github.com/stripe/smokescreen/pkg/smokescreen"
 )
 
 // This default implementation of RoleFromRequest uses the CommonName of the

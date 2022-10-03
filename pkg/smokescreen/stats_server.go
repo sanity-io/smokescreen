@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/stripe/smokescreen/pkg/smokescreen/conntrack"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/conntrack"
 )
 
 type StatsServer struct {

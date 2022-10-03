@@ -8,8 +8,8 @@ import (
 	"time"
 
 	cache "github.com/patrickmn/go-cache"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 	"github.com/sirupsen/logrus"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
 	"golang.org/x/net/publicsuffix"
 )
 

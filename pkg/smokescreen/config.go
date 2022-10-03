@@ -18,10 +18,10 @@ import (
 	"sync/atomic"
 	"time"
 
+	acl "github.com/sanity-io/smokescreen/pkg/smokescreen/acl/v1"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/conntrack"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 	log "github.com/sirupsen/logrus"
-	acl "github.com/stripe/smokescreen/pkg/smokescreen/acl/v1"
-	"github.com/stripe/smokescreen/pkg/smokescreen/conntrack"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
 )
 
 type RuleRange struct {

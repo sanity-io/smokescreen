@@ -12,8 +12,8 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/stripe/smokescreen/pkg/smokescreen"
-	"github.com/stripe/smokescreen/pkg/smokescreen/conntrack"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/conntrack"
 )
 
 // Process command line args into a configuration object.  If the "--help" or

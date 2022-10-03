@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/hostport"
 	"github.com/sirupsen/logrus"
-	"github.com/stripe/smokescreen/pkg/smokescreen/hostport"
 )
 
 type Decider interface {
@@ -80,10 +80,10 @@ func (acl *ACL) Add(svc string, r Rule) error {
 }
 
 // Decide takes uses the rule configured for the given service to determine if
-//   1. The host is in the rule's allowed domain
-//   2. The host has been globally denied
-//   3. The host has been globally allowed
-//   4. There is a default rule for the ACL
+//  1. The host is in the rule's allowed domain
+//  2. The host has been globally denied
+//  3. The host has been globally allowed
+//  4. There is a default rule for the ACL
 func (acl *ACL) Decide(service, host string) (Decision, error) {
 	var d Decision
 
