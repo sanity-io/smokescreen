@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
 )
 
 var testLogger = logrus.New()

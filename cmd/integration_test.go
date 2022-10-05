@@ -27,9 +27,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/stripe/smokescreen/pkg/smokescreen"
-	acl "github.com/stripe/smokescreen/pkg/smokescreen/acl/v1"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen"
+	acl "github.com/sanity-io/smokescreen/pkg/smokescreen/acl/v1"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 )
 
 var ProxyTargetHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

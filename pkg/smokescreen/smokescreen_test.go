@@ -18,12 +18,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/conntrack"
+	"github.com/sanity-io/smokescreen/pkg/smokescreen/metrics"
 	"github.com/sirupsen/logrus"
 	logrustest "github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/stripe/smokescreen/pkg/smokescreen/conntrack"
-	"github.com/stripe/smokescreen/pkg/smokescreen/metrics"
 )
 
 var allowRanges = []string{
