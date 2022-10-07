@@ -180,6 +180,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusHistogram(
 	metric string,
 	value float64,
 	tags map[string]string) {
+	fmt.Printf("Metric to record: %s.\nExisting metrics: %+v", metric, mapKeys(mc.histograms))
 	if existingHistogram, ok := mc.histograms[metric]; ok {
 		existingHistogram.With(tags).Observe(value)
 	} else {
