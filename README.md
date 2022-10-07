@@ -6,7 +6,7 @@ external world (e.g., webhooks).
 Smokescreen restricts which URLs it connects to: it resolves each domain name
 that is requested and ensures that it is a publicly routable IP and not a
 Stripe-internal IP. This prevents a class of attacks where, for instance, our
-own webhooks infrastructure is used to scan Stripe's internal network.
+own webhooks infrastructure is used to scan Stripe's internal network.  
 
 Smokescreen also allows us to centralize egress from Stripe, allowing us to give
 financial partners stable egress IP addresses and abstracting away the details
