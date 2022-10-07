@@ -195,7 +195,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusTimer(
 	metric string,
 	duration time.Duration,
 	tags map[string]string) {
-	timerMetric := metric + "-timer"
+	timerMetric := metric + "_timer"
 	if existingHistogram, ok := mc.timings[timerMetric]; ok {
 		existingHistogram.With(tags).Observe(float64(duration.Milliseconds()))
 	} else {
