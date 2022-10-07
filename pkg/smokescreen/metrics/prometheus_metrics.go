@@ -5,6 +5,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 	"strings"
 	"sync/atomic"
@@ -180,7 +181,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusHistogram(
 	metric string,
 	value float64,
 	tags map[string]string) {
-	fmt.Printf("Metric to record: %s.\nExisting metrics: %+v", metric, mapKeys(mc.histograms))
+	log.Printf("Histogram Metric to record: %s.\nExisting metrics: %+v", metric, mapKeys(mc.histograms))
 	if existingHistogram, ok := mc.histograms[metric]; ok {
 		existingHistogram.With(tags).Observe(value)
 	} else {
@@ -197,6 +198,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusTimer(
 	duration time.Duration,
 	tags map[string]string) {
 	timerMetric := metric + "_timer"
+	log.Printf("Timer Metric to record: %s.\nExisting metrics: %+v", metric, mapKeys(mc.histograms))
 	if existingHistogram, ok := mc.timings[timerMetric]; ok {
 		existingHistogram.With(tags).Observe(float64(duration.Milliseconds()))
 	} else {
