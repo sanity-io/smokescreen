@@ -198,7 +198,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusTimer(
 	duration time.Duration,
 	tags map[string]string) {
 	timerMetric := metric + "_timer"
-	log.Printf("Timer Metric to record: %s.\nExisting metrics: %+v", metric, mapKeys(mc.histograms))
+	log.Printf("Timer Metric to record: %s.\nExisting metrics: %+v", timerMetric, mapKeys(mc.timings))
 	if existingHistogram, ok := mc.timings[timerMetric]; ok {
 		existingHistogram.With(tags).Observe(float64(duration.Milliseconds()))
 	} else {
@@ -207,7 +207,7 @@ func (mc *PrometheusMetricsClient) observeValuePrometheusTimer(
 		}, mapKeys(tags))
 
 		histogram.With(tags).Observe(float64(duration.Milliseconds()))
-		mc.histograms[timerMetric] = *histogram
+		mc.timings[timerMetric] = *histogram
 	}
 }
 
