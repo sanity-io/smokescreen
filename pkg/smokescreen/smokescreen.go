@@ -216,11 +216,15 @@ func resolveTCPAddr(config *Config, network, addr string) (*net.TCPAddr, error) 
 
 func safeResolve(config *Config, network, addr string) (*net.TCPAddr, string, error) {
 	config.MetricsClient.Incr("resolver.attempts_total", 1)
+
+	resolveStart := time.Now()
 	resolved, err := resolveTCPAddr(config, network, addr)
+	resolveDuration := time.Since(resolveStart)
 	if err != nil {
 		config.MetricsClient.Incr("resolver.errors_total", 1)
 		return nil, "", err
 	}
+	config.MetricsClient.Timing("resolver.lookup_time", resolveDuration, 0.5)
 
 	classification := classifyAddr(config, resolved)
 	config.MetricsClient.Incr(classification.statsdString(), 1)
@@ -474,6 +478,15 @@ func BuildProxy(config *Config) *goproxy.ProxyHttpServer {
 
 		sctx.logger.WithField("url", req.RequestURI).Debug("received HTTP proxy request")
 
+		// Call the custom request handler if it exists
+		if config.CustomRequestHandler != nil {
+			err = config.CustomRequestHandler(req)
+			if err != nil {
+				pctx.Error = denyError{err}
+				return req, rejectResponse(pctx, pctx.Error)
+			}
+		}
+
 		sctx.decision, sctx.lookupTime, pctx.Error = checkIfRequestShouldBeProxied(config, req, destination)
 
 		// Returning any kind of response in this handler is goproxy's way of short circuiting
@@ -608,6 +621,16 @@ func handleConnect(config *Config, pctx *goproxy.ProxyCtx) (string, error) {
 		pctx.Error = denyError{err}
 		return "", pctx.Error
 	}
+
+	// Call the custom request handler if it exists
+	if config.CustomRequestHandler != nil {
+		err = config.CustomRequestHandler(pctx.Req)
+		if err != nil {
+			pctx.Error = denyError{err}
+			return "", pctx.Error
+		}
+	}
+
 	sctx.decision, sctx.lookupTime, pctx.Error = checkIfRequestShouldBeProxied(config, pctx.Req, destination)
 	if pctx.Error != nil {
 		return "", denyError{pctx.Error}
